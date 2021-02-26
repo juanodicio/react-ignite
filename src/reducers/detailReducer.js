@@ -1,5 +1,7 @@
 const initialState = {
-  game: {},
+  game: {
+    parent_platforms: []
+  },
   screens: []
 };
 
