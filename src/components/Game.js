@@ -9,6 +9,7 @@ const Game = ({id, name, released, image}) => {
 
   const dispatch = useDispatch();
   const loadDetailHandler = () => {
+    document.body.style.overflow = "hidden";
     dispatch(loadDetail(id));
   }
 
@@ -29,6 +30,7 @@ const StyledGame = styled(motion.div)`
   text-align: center;
   cursor: pointer;
   border-radius: 1rem;
+  overflow: hidden;
   img {
     width: 100%;
     height: 40vh;
