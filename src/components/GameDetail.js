@@ -5,45 +5,49 @@ import {motion} from "framer-motion";
 import {useSelector} from "react-redux";
 
 const GameDetail = () => {
-  const {screens, game} = useSelector((state) => state.detail)
+  const {screens, game, isLoading} = useSelector((state) => state.detail)
   console.log(game.parent_platforms)
   return (
-    <CardShadow>
-      <Detail>
-        <Stats>
-          <div className="rating">
-            <h3>{game.name}</h3>
-            <p>Rating: {game.rating}</p>
+    <>
+      {!isLoading && (
+      <CardShadow>
+        <Detail>
+          <Stats>
+            <div className="rating">
+              <h3>{game.name}</h3>
+              <p>Rating: {game.rating}</p>
+            </div>
+
+            <Info>
+              <h3>Platforms</h3>
+              <Platforms>
+                {game.parent_platforms.map(item => (
+                  <h3 key={item.platform.id}>{item.platform.name}</h3>
+                ))}
+              </Platforms>
+            </Info>
+          </Stats>
+
+          <Media>
+            <img src={game.background_image} alt={game.background_image} />
+          </Media>
+
+          <Description>
+            <p>{game.description_raw}</p>
+          </Description>
+
+          <div className="gallery">
+            {screens.map(screen => (
+              <img key={screen.id} src={screen.image} alt="game" />
+            ))}
           </div>
 
-          <Info>
-            <h3>Platforms</h3>
-            <Platforms>
-              {game.parent_platforms.map(item => (
-                <h3 key={item.platform.id}>{item.platform.name}</h3>
-              ))}
-            </Platforms>
-          </Info>
-        </Stats>
-
-        <Media>
-          <img src={game.background_image} alt={game.background_image} />
-        </Media>
-
-        <Description>
-          <p>{game.description_raw}</p>
-        </Description>
-
-        <div className="gallery">
-          {screens.map(screen => (
-            <img key={screen.id} src={screen.image} alt="game" />
-          ))}
-        </div>
-
-      </Detail>
-    </CardShadow>
+        </Detail>
+      </CardShadow>
+      )}
+    </>
   );
-}
+};
 
 const CardShadow = styled(motion.div)`
   width: 100%;
